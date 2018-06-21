@@ -25,6 +25,14 @@ M-x jest-coverage-mode
 Enabling the mode is very slow, if your JavaScript source file is big. To refresh the view
 after made changes to coverage file you can call `M-x jc/mark-buffer`.
 
+To change colors
+
+```
+;; if you're using light theme
+(face-spec-set 'jc/covered '((t :background "light green")))
+(face-spec-set 'jc/not-covered '((t :background "light red")))
+```
+
 ## License
 
 Copyright (C) 2018 Jakub Jankiewicz

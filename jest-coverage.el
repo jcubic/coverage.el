@@ -34,12 +34,12 @@
       (jc/mark-buffer)
     (jc/clear-buffer)))
 
-(defface jest-coverage-covered
+(defface jc/covered
     '((t :background "dark green"))
   "background color for covered lines"
   :group 'coverage-minor-mode)
 
-(defface jest-coverage-not-covered
+(defface jc/not-covered
     '((t :background "dark red"))
   "background color for not covered lines"
   :group
@@ -87,8 +87,8 @@
                               (end-line-pos (jc/line-pos-at-line (gethash "line" start)))
                               (end-pos (+ end-line-pos (gethash "column" end)))
                               (face (if (= value 0)
-                                        'jest-coverage-not-covered
-                                      'jest-coverage-covered)))
+                                        'jc/not-covered
+                                      'jc/covered)))
                          (hlt-highlight-region start-pos end-pos face)))
                    (if (= value 0)
                        (setq not-covered (+ 1 not-covered))
