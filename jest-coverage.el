@@ -35,12 +35,12 @@
     (jc/clear-buffer)))
 
 (defface jest-coverage-covered
-    '((t (:background "dark green")))
+    '((t :background "dark green"))
   "background color for covered lines"
   :group 'coverage-minor-mode)
 
 (defface jest-coverage-not-covered
-    '((t (:background "dark red")))
+    '((t :background "dark red"))
   "background color for not covered lines"
   :group
   'coverage-minor-mode)
