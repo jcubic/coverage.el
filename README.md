@@ -22,7 +22,7 @@ then run
 M-x jest-coverage-mode
 ```
 
-Enabling the mode is very slow, if your JavaScript source file that's big. To refresh the view
+Enabling the mode is very slow, if your JavaScript source file is big. To refresh the view
 after made changes to coverage file you can call `M-x jc/mark-buffer`.
 
 ## License
