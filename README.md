@@ -1,9 +1,16 @@
-# jest-coverage.el
-Emacs minor mode for displaying code coverage from jest JavaScript framework.
+# coverage.el
+Emacs minor mode for displaying code coverage.
+
+## Supporting Languages:
+
+* jest JavaScript framework
+* phpunit xml file generated using coverage-clover option
 
 ## Requirement
 
 [Highlight.el](https://www.emacswiki.org/emacs/highlight.el) by Drew Adams
+
+plus default `xml` and `json` packages
 
 ## Limitations
 
@@ -13,13 +20,13 @@ command and use this to get coverage file in coverage directory).
 ### Usage
 
 ```
-(require 'jest-coverage)
+(require 'coverage)
 ```
 
 then run
 
 ```
-M-x jest-coverage-mode
+M-x coverage-mode
 ```
 
 Enabling the mode is very slow, if your JavaScript source file is big. To refresh the view
@@ -35,6 +42,7 @@ To change colors
 
 ## License
 
-Copyright (C) 2018 Jakub Jankiewicz
+Copyright (C) 2018-2019 [Jakub T. Jankiewicz](https://jcubic.pl/me)
+
 Released under GPLv3 license
 
