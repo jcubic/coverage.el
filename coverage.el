@@ -26,7 +26,10 @@
 (require 'xml)
 
 (make-variable-buffer-local
-   (defvar jc/statements nil "variable that contain previous coverage"))
+   (defvar jc/statements nil "variable that contain previous statement coverage"))
+
+(make-variable-buffer-local
+   (defvar jc/branches nil "variable that contain previous branch coverage"))
 
 (define-minor-mode coverage-mode
   "Show code coverage from jest json file for git controled repo."
@@ -114,7 +117,7 @@
 (defun jc/mark-buffer ()
   (let ((ext (file-name-extension (buffer-file-name))))
     (cond ((string= "php" ext) (jc/mark-buffer-php))
-          ((string= "js" ext) (jc/mark-buffer-jest))
+          ((or (string= "js" ext) (string= "ts" ext)) (jc/mark-buffer-jest))
           (t (throw 'jest "invalid filename")))))
 
 (defun jc/parse-xml (fname)
@@ -125,6 +128,7 @@
 
 (defun jc/mark-buffer-jest ()
   (interactive)
+  (message "jc/mark-buffer-jest")
   (let* ((dir (jc/root-git-repo))
          (json-object-type 'hash-table)
          (json-array-type 'list)
@@ -133,8 +137,8 @@
     (if (not (file-exists-p coverage-fname))
         (message "file coverage not found")
       (let* ((json (json-read-file coverage-fname))
-            (filename (jc/real-filename (buffer-file-name (current-buffer))))
-            (coverage (gethash filename json)))
+             (filename (jc/real-filename (buffer-file-name (current-buffer))))
+             (coverage (gethash filename json)))
         (if (not (hash-table-p coverage))
             (message "No coverage found for this file")
           (let ((statments (gethash "statementMap" coverage)))
@@ -149,11 +153,22 @@
                                       (end (gethash "end" statment))
                                       (start-line-pos (jc/line-pos-at-line (gethash "line" start)))
                                       (start-pos (+ start-line-pos (gethash "column" start)))
-                                      (end-line-pos (jc/line-pos-at-line (gethash "line" start)))
-                                      (end-pos (+ end-line-pos (gethash "column" end)))
+                                      (end-line (gethash "line" end))
+                                      (end-line-pos (jc/line-pos-at-line end-line))
+                                      (end-column (gethash "column" end))
+                                      (end-pos (if end-column
+                                                   (+ end-line-pos end-column)
+                                                 (jc/line-pos-at-line (+ end-line 1))))
                                       (face (if (= value 0)
                                                 'jc/not-covered
                                               'jc/covered)))
+                                 (message "[%s:%s] %s:%s -> [%s:%s] %s:%s"
+                                          (gethash "line" start)
+                                          (gethash "column" start)
+                                          start-line-pos start-pos
+                                          (gethash "line" end)
+                                          (gethash "column" end)
+                                          end-line-pos end-pos)
                                  (hlt-highlight-region start-pos end-pos face)))
                            (if (= value 0)
                                (setq not-covered (+ 1 not-covered))
