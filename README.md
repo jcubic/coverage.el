@@ -3,8 +3,8 @@ Emacs minor mode for displaying code coverage.
 
 ## Supporting Languages:
 
-* `jest` JavaScript framework (also with TypeScript using `ts-jest`)
-* phpunit xml file generated using coverage-clover option
+* `jest` JavaScript framework (also with TypeScript using `ts-jest`) require running `jest --coverage`,
+* phpunit xml file generated using coverage-clover option.
 
 ## Requirement
 
