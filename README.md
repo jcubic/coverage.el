@@ -3,7 +3,7 @@ Emacs minor mode for displaying code coverage.
 
 ## Supporting Languages:
 
-* jest JavaScript framework
+* `jest` JavaScript framework (also with TypeScript using `ts-jest`)
 * phpunit xml file generated using coverage-clover option
 
 ## Requirement
@@ -42,7 +42,6 @@ To change colors
 
 ## License
 
-Copyright (C) 2018-2019 [Jakub T. Jankiewicz](https://jcubic.pl/me)
-
+Copyright (C) 2018-2023 [Jakub T. Jankiewicz](https://jcubic.pl/me)<br/>
 Released under GPLv3 license
 
