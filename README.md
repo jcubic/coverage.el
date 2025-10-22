@@ -5,7 +5,7 @@ Emacs minor mode for displaying code coverage.
 
 * `jest` - JavaScript framework (also with TypeScript using `ts-jest`) require running `jest --coverage`,
 * `vitest` - works with JavaScript and TypeScript (require adding `json` reporter)
-* phpunit - xml file generated using coverage-clover option.
+* `phpunit` - xml file generated using coverage-clover option.
 
 ## Requirement
 
